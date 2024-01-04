@@ -17,10 +17,11 @@ public class HelloApplication extends Application {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information Dialog");
         alert.setHeaderText("Look, an Information Dialog");
-        alert.setContentText("I have a great message for you!");
+        alert.setContentText("I have a great message for you! With some longer text to show the issue");
         alert.getDialogPane().setPrefSize(300,300);
         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
         alert.initOwner(stage.getOwner());
+        alert.setResizable(true);
 
         alert.showAndWait();
 
