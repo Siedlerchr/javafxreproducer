@@ -26,12 +26,12 @@ public class HelloApplication extends Application {
 
         DialogPane dlgPane = new DialogPane();
         dlgPane.setPrefHeight(476.0);
-        dlgPane.getButtonTypes().addAll(ButtonType.CANCEL,  ButtonType.APPLY);
+        dlgPane.getButtonTypes().addAll(ButtonType.CANCEL, ButtonType.APPLY);
         VBox vbox = new VBox();
         vbox.setPrefWidth(400);
         vbox.setPrefHeight(200);
         vbox.getChildren().addAll(createTitledPane("Recommmend", false, 50.0, 100.0),
-                createTitledPane("Other", true,100.0, 200.0 ),
+                createTitledPane("Other", true, 100.0, 200.0),
                 createTitledPane("Custom", false, 200.0, 200.0));
 
         dlgPane.setContent(vbox);
@@ -44,6 +44,8 @@ public class HelloApplication extends Application {
     private Node createTitledPane(String titleText, Boolean collapsible, double height, double width) {
 
         FlowPane flowPane = new FlowPane();
+        flowPane.setPrefWidth(width);
+        flowPane.setPrefHeight(height);
 
         for (int i = 0; i < 10; i++) {
             Button button = new Button("Button with long" + i);
@@ -53,6 +55,7 @@ public class HelloApplication extends Application {
         titledPane.setContent(flowPane);
         titledPane.setText(titleText);
         titledPane.setCollapsible(collapsible);
+        titledPane.setExpanded(!collapsible);
 
         return titledPane;
 
