@@ -16,7 +16,7 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Dialog<String> alert = new Dialog<>();
         alert.setTitle("Information Dialog");
         alert.setHeaderText("Look, an Information Dialog");
         alert.setContentText("I have a great message for you! With some longer text to show the issue");
@@ -30,8 +30,33 @@ public class HelloApplication extends Application {
         VBox vbox = new VBox();
         vbox.setPrefWidth(400);
         vbox.setPrefHeight(200);
+
+
+
+        FlowPane otherPane = new FlowPane();
+        otherPane.setPrefWidth(100.0);
+        otherPane.setPrefHeight(200.0);
+
+        for (int i = 0; i < 10; i++) {
+            Button button = new Button("Button with long" + i);
+            otherPane.getChildren().add(button);
+        }
+        TitledPane otherTitledPane = new TitledPane();
+        otherTitledPane.setContent(otherPane);
+        otherTitledPane.setText("other");
+        otherTitledPane.setCollapsible(true);
+        otherTitledPane.setExpanded(false);
+
+        otherTitledPane.expandedProperty().addListener((obs, wasExpanded, isNowExpanded) -> {
+            if (isNowExpanded) {
+                alert.setHeight(alert.getHeight() + otherPane.getHeight());
+            } else {
+                alert.setHeight(alert.getHeight() - otherPane.getHeight());
+            }
+        });
+
         vbox.getChildren().addAll(createTitledPane("Recommmend", false, 50.0, 100.0),
-                createTitledPane("Other", true, 100.0, 200.0),
+                otherTitledPane,
                 createTitledPane("Custom", false, 200.0, 200.0));
 
         dlgPane.setContent(vbox);
