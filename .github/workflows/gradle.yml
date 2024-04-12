@@ -12,6 +12,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: "${{ github.workflow }}-${{ github.head_ref || github.ref }}"
+  cancel-in-progress: true
+
 jobs:
   build:
     strategy:
@@ -32,7 +36,7 @@ jobs:
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: javafxreproducer-{{ matrix.os }}
+        name: javafxreproducer-${{ matrix.os }}
         path: build/distributions
         compression-level: 0
   keepalive:
