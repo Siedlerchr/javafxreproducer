@@ -1,9 +1,7 @@
 package org.jabreftest.test.javafxreproducer;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
@@ -15,7 +13,6 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-
         Dialog<String> alert = new Dialog<>();
         alert.setTitle("Information Dialog");
         alert.setHeaderText("Look, an Information Dialog");
@@ -30,8 +27,6 @@ public class HelloApplication extends Application {
         VBox vbox = new VBox();
         vbox.setPrefWidth(400);
         vbox.setPrefHeight(200);
-
-
 
         FlowPane otherPane = new FlowPane();
         otherPane.setPrefWidth(100.0);
@@ -59,15 +54,16 @@ public class HelloApplication extends Application {
                 otherTitledPane,
                 createTitledPane("Custom", false, 200.0, 200.0));
 
+        TextField textField = new TextField();
+        vbox.getChildren().add(textField);
+
         dlgPane.setContent(vbox);
 
         alert.setDialogPane(dlgPane);
         alert.showAndWait();
-
     }
 
     private Node createTitledPane(String titleText, Boolean collapsible, double height, double width) {
-
         FlowPane flowPane = new FlowPane();
         flowPane.setPrefWidth(width);
         flowPane.setPrefHeight(height);
@@ -83,7 +79,6 @@ public class HelloApplication extends Application {
         titledPane.setExpanded(!collapsible);
 
         return titledPane;
-
     }
 
     public static void main(String[] args) {
