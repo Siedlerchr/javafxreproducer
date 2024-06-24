@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.input.KeyEvent;
 import org.tinylog.Logger;
 
 public class MinimalJavaFXApp extends Application {
@@ -15,7 +16,7 @@ public class MinimalJavaFXApp extends Application {
         // Create a TextField
         TextField textField = new TextField();
 
-        textField.setOnKeyPressed(event -> {
+        textField.addEventHandler(KeyEvent.ANY, event -> {
             Logger.info("Key pressed: code: {}", event.getCode());
             Logger.info("Key pressed: event: {}", event);
             Logger.info("Condition: {}", event.getCode() == KeyCode.Z);
