@@ -1,6 +1,9 @@
 package org.jabreftest.test.javafxreproducer;
 
+import com.tobiasdiez.easybind.EasyBind;
+
 import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
@@ -9,6 +12,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class HelloApplication extends Application {
     @Override
@@ -56,6 +62,16 @@ public class HelloApplication extends Application {
 
         TextField textField = new TextField();
         vbox.getChildren().add(textField);
+        SimpleStringProperty textProperty = new SimpleStringProperty();
+        EasyBind.subscribe(textProperty, newText -> {
+            textField.setText(newText);
+        });
+        EasyBind.subscribe(textInputControl.textProperty(), viewModelTextProperty::set);
+
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+
+        Runnable task = ....
+        executor.schedule(task, 5, TimeUnit.SECONDS);
 
         dlgPane.setContent(vbox);
 
