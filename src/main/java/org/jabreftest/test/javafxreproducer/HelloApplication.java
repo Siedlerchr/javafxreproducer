@@ -4,6 +4,8 @@ import com.tobiasdiez.easybind.EasyBind;
 
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
@@ -15,6 +17,7 @@ import java.io.IOException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 public class HelloApplication extends Application {
 
@@ -70,12 +73,12 @@ public class HelloApplication extends Application {
         EasyBind.subscribe(textProperty, newText -> {
             textField.setText(newText);
         });
-        EasyBind.subscribe(textField.textProperty(), textProperty::set);
+        textField.textProperty().addListener((obs, oldValue, newValue) -> textProperty.set(newValue));
 
         executor = Executors.newSingleThreadScheduledExecutor();
 
         Runnable task = () -> textProperty.set("Text set internally. Now click here. Add a letter. Then press Ctrl+Z.");
-        executor.schedule(task, 5, TimeUnit.SECONDS);
+        executor.schedule(task, 3, TimeUnit.SECONDS);
         //endregion
 
         dlgPane.setContent(vbox);
