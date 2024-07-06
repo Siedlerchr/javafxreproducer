@@ -70,8 +70,8 @@ public class HelloApplication extends Application {
         TextField textField = new TextField();
         vbox.getChildren().add(textField);
         SimpleStringProperty textProperty = new SimpleStringProperty();
-        textProperty.addListener((obs1, oldValue1, newValue1) -> textField.textProperty().setValue(newValue1));
-        textField.textProperty().addListener((obs, oldValue, newValue) -> textProperty.set(newValue));
+        textProperty.addListener((_, _, newValue) -> textField.textProperty().setValue(newValue));
+        textField.textProperty().addListener((_, _, newValue) -> textProperty.set(newValue));
 
         executor = Executors.newSingleThreadScheduledExecutor();
 
