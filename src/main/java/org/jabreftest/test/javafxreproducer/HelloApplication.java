@@ -17,6 +17,9 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class HelloApplication extends Application {
+
+    private ScheduledExecutorService executor;
+
     @Override
     public void start(Stage stage) throws IOException {
         Dialog<String> alert = new Dialog<>();
@@ -60,23 +63,31 @@ public class HelloApplication extends Application {
                 otherTitledPane,
                 createTitledPane("Custom", false, 200.0, 200.0));
 
+        //region Textfield
         TextField textField = new TextField();
         vbox.getChildren().add(textField);
         SimpleStringProperty textProperty = new SimpleStringProperty();
         EasyBind.subscribe(textProperty, newText -> {
             textField.setText(newText);
         });
-        EasyBind.subscribe(textInputControl.textProperty(), viewModelTextProperty::set);
+        EasyBind.subscribe(textField.textProperty(), textProperty::set);
 
-        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        executor = Executors.newSingleThreadScheduledExecutor();
 
-        Runnable task = ....
+        Runnable task = () -> textProperty.set("Text set internally. Now click here. Add a letter. Then press Ctrl+Z.");
         executor.schedule(task, 5, TimeUnit.SECONDS);
+        //endregion
 
         dlgPane.setContent(vbox);
 
         alert.setDialogPane(dlgPane);
         alert.showAndWait();
+    }
+
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        executor.shutdown();
     }
 
     private Node createTitledPane(String titleText, Boolean collapsible, double height, double width) {
