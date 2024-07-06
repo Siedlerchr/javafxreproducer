@@ -1,23 +1,23 @@
 package org.jabreftest.test.javafxreproducer;
 
-import com.tobiasdiez.easybind.EasyBind;
-
-import javafx.application.Application;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.Node;
-import javafx.scene.control.*;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Consumer;
+
+import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class HelloApplication extends Application {
 
@@ -70,9 +70,7 @@ public class HelloApplication extends Application {
         TextField textField = new TextField();
         vbox.getChildren().add(textField);
         SimpleStringProperty textProperty = new SimpleStringProperty();
-        EasyBind.subscribe(textProperty, newText -> {
-            textField.setText(newText);
-        });
+        textProperty.addListener((obs1, oldValue1, newValue1) -> textField.textProperty().setValue(newValue1));
         textField.textProperty().addListener((obs, oldValue, newValue) -> textProperty.set(newValue));
 
         executor = Executors.newSingleThreadScheduledExecutor();

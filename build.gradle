@@ -11,7 +11,7 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-    maven { url 'https://oss.sonatype.org/content/groups/public' }
+    // maven { url 'https://oss.sonatype.org/content/groups/public' }
     // maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
     // maven { url 'https://jitpack.io' }
     // maven { url 'https://sandec.jfrog.io/artifactory/repo' }
@@ -43,9 +43,9 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 
-    implementation('com.tobiasdiez:easybind:2.2.1-SNAPSHOT') {
-        exclude group: 'org.openjfx'
-    }
+    // implementation('com.tobiasdiez:easybind:2.2.1-SNAPSHOT') {
+    //    exclude group: 'org.openjfx'
+    // }
 }
 
 test {
