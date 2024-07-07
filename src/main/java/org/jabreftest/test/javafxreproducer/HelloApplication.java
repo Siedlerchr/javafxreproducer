@@ -1,9 +1,6 @@
 package org.jabreftest.test.javafxreproducer;
 
 import java.io.IOException;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
@@ -20,8 +17,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class HelloApplication extends Application {
-
-    private ScheduledExecutorService executor;
 
     @Override
     public void start(Stage stage) throws IOException {
