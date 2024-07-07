@@ -66,20 +66,12 @@ public class HelloApplication extends Application {
                 otherTitledPane,
                 createTitledPane("Custom", false, 200.0, 200.0));
 
-        //region Textfield
         TextField textField = new TextField();
+        textField.setPromptText("Type something and then press Ctrl+Z.");
         vbox.getChildren().add(textField);
         SimpleStringProperty textProperty = new SimpleStringProperty();
         textProperty.addListener((_, _, newValue) -> textField.textProperty().set(newValue));
         textField.textProperty().addListener((_, _, newValue) -> textProperty.set(newValue));
-
-        System.out.println(textField.getTextFormatter());
-
-        executor = Executors.newSingleThreadScheduledExecutor();
-
-        Runnable task = () -> textProperty.set("Text set internally. Now click here. Add a letter. Then press Ctrl+Z.");
-        executor.schedule(task, 3, TimeUnit.SECONDS);
-        //endregion
 
         dlgPane.setContent(vbox);
 
