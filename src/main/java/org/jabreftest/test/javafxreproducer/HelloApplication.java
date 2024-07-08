@@ -74,12 +74,6 @@ public class HelloApplication extends Application {
         alert.showAndWait();
     }
 
-    @Override
-    public void stop() throws Exception {
-        super.stop();
-        executor.shutdown();
-    }
-
     private Node createTitledPane(String titleText, Boolean collapsible, double height, double width) {
         FlowPane flowPane = new FlowPane();
         flowPane.setPrefWidth(width);
