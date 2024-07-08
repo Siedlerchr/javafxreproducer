@@ -1,16 +1,23 @@
 package org.jabreftest.test.javafxreproducer;
 
+import java.io.IOException;
+
 import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class HelloApplication extends Application {
+
     @Override
     public void start(Stage stage) throws IOException {
         Dialog<String> alert = new Dialog<>();
@@ -55,7 +62,11 @@ public class HelloApplication extends Application {
                 createTitledPane("Custom", false, 200.0, 200.0));
 
         TextField textField = new TextField();
+        textField.setPromptText("Type something and then press Ctrl+Z.");
         vbox.getChildren().add(textField);
+        SimpleStringProperty textProperty = new SimpleStringProperty();
+        textProperty.addListener((_, _, newValue) -> textField.textProperty().set(newValue));
+        textField.textProperty().addListener((_, _, newValue) -> textProperty.set(newValue));
 
         dlgPane.setContent(vbox);
 
