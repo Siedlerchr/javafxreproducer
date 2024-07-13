@@ -1,14 +1,20 @@
 package org.jabreftest.test.javafxreproducer;
 
 import javafx.application.Application;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.IOException;
+import java.util.Comparator;
 
 public class HelloApplication extends Application {
     @Override
@@ -52,7 +58,11 @@ public class HelloApplication extends Application {
 
         vbox.getChildren().addAll(createTitledPane("Recommmend", false, 50.0, 100.0),
                 otherTitledPane,
-                createTitledPane("Custom", false, 200.0, 200.0));
+                createTitledPane("Custom", false, 200.0, 200.0),
+                new Label("Table without using SortedList"),
+                createTableView(false),
+                new Label("Table using SortedList"),
+                createTableView(true));
 
         TextField textField = new TextField();
         vbox.getChildren().add(textField);
@@ -79,6 +89,44 @@ public class HelloApplication extends Application {
         titledPane.setExpanded(!collapsible);
 
         return titledPane;
+    }
+
+    private TableView<Data> createTableView(boolean useSortedList) {
+        TableView<Data> tableView = new TableView<>();
+
+        TableColumn<Data, Integer> indexColumn = new TableColumn<>("#");
+        indexColumn.setCellValueFactory(cell -> new ReadOnlyObjectWrapper<>(cell.getValue().index()));
+        indexColumn.setSortable(false);
+
+        TableColumn<Data, Integer> column1 = new TableColumn<>("Col1");
+        column1.setCellValueFactory(cell -> new ReadOnlyObjectWrapper<>(cell.getValue().val1()));
+
+        TableColumn<Data, Integer> column2 = new TableColumn<>("Col2");
+        column2.setCellValueFactory(cell -> new ReadOnlyObjectWrapper<>(cell.getValue().val2()));
+
+        tableView.getColumns().add(indexColumn);
+        tableView.getColumns().add(column1);
+        tableView.getColumns().add(column2);
+
+        ObservableList<Data> data = FXCollections.observableArrayList(
+                new Data(0, 5, 4),
+                new Data(1, 1, 7),
+                new Data(2, 5, 2),
+                new Data(3, 5, 3)
+        );
+
+        if (useSortedList) {
+            SortedList<Data> sortedData = new SortedList<>(data);
+
+            sortedData.comparatorProperty().bind(tableView.comparatorProperty());
+            tableView.setItems(sortedData);
+        } else {
+            tableView.setItems(data);
+        }
+        return tableView;
+    }
+
+    public record Data(int index, int val1, int val2) {
     }
 
     public static void main(String[] args) {
