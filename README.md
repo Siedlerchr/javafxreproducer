@@ -7,3 +7,7 @@ Alternatively, use the precompiled binaries from the [Java CI with Gradle check]
 ## Screenshot
 
 ![screenshot](screenshot.png)
+
+## Related Work
+
+- [MyApp - JavaFX Demo Project](https://github.com/JulienTroudet/easyJavaFXSetup) - Demo project designed to provide a solid foundation for modern JavaFX applications. It includes all the essential configurations to simplify development, theme management, and multi-platform distribution.
