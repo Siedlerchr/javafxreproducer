@@ -39,11 +39,3 @@ jobs:
         name: javafxreproducer-${{ matrix.os }}
         path: build/distributions
         compression-level: 0
-  keepalive:
-    name: Keepalive
-    runs-on: ubuntu-latest
-    permissions:
-      actions: write
-    steps:
-      - uses: actions/checkout@v4
-      - uses: gautamkrishnar/keepalive-workflow@v2
