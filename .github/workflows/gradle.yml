@@ -36,5 +36,5 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: javafxreproducer-${{ matrix.os }}
-        path: build/distributions
+        path: build/packages
         compression-level: 0
