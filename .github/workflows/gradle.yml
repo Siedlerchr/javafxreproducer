@@ -34,6 +34,8 @@ jobs:
     # See https://docs.gradle.org/current/userguide/logging.html#sec:choosing_a_log_level for the log levels
     # We opted for "-i", because it outputs the commands used to build the application image
     - run: ./gradlew -i jpackage
+    - run: ls -la /Users/runner/work/javafxreproducer/javafxreproducer/build/tmp/jpackage/macos-14/app-content/Resources
+      if: ${{ always() && runner.os == 'macOS' }}
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4
       with:
