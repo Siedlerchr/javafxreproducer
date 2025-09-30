@@ -9,9 +9,11 @@ plugins {
 
 group = "org.jabreftest.test"
 
-// "1.0-SNAPSHOT" cannot be used, otherwise we get
-// java.lang.IllegalArgumentException: Version [1.0-SNAPSHOT] contains invalid component [0-SNAPSHOT]
-version = "0.1.0"
+// "1.0-SNAPSHOT" cannot be used; otherwise we get
+//   java.lang.IllegalArgumentException: Version [1.0-SNAPSHOT] contains invalid component [0-SNAPSHOT]
+// 0.1.0 cannaot be used; otherwise we get
+//   Bundler Mac Application Image skipped because of a configuration problem: The first number in an app-version cannot be zero or negative.
+version = "1.0.0"
 
 repositories {
     mavenCentral()
