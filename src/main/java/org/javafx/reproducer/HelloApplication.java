@@ -14,17 +14,22 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) {
-        Application.setUserAgentStylesheet(new NordDark().getUserAgentStylesheet());
+//        Application.setUserAgentStylesheet(new NordDark().getUserAgentStylesheet());
 
         stage.setTitle("Hello World!");
         Button button = new Button();
         button.setText("Add Overlay");
         button.setOnAction(_ -> addOverlay());
 
+        // Current implementation
         var root = new DialogPane();
         root.setContent(button);
-        scene = new Scene(root, 300, 300);
 
+        // Comparison with different Pane
+//        var root = new StackPane();
+//        root.getChildren().add(button);
+
+        scene = new Scene(root, 300, 300);
         stage.setScene(scene);
         stage.show();
     }
