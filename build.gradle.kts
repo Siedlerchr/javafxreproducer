@@ -7,7 +7,7 @@ plugins {
     id("org.gradlex.java-module-packaging") version "1.2"
 }
 
-group = "org.jabreftest.test"
+group = "org.javafx"
 
 // "1.0-SNAPSHOT" cannot be used; otherwise we get
 //   java.lang.IllegalArgumentException: Version [1.0-SNAPSHOT] contains invalid component [0-SNAPSHOT]
@@ -20,7 +20,6 @@ repositories {
 }
 
 val javafx = "25.0.1"
-val junitVersion = "6.0.1"
 
 java {
   toolchain {
@@ -33,19 +32,13 @@ tasks.withType<JavaCompile>().configureEach {
 }
 
 application {
-    mainModule.set("javafx.reproducer")
-    mainClass.set("org.jabreftest.test.javafxreproducer.HelloApplication")
+    mainModule.set("org.javafx.reproducer")
+    mainClass.set("org.javafx.reproducer.HelloApplication")
 }
 
 dependencies {
     implementation("org.openjfx:javafx-controls:$javafx")
-    implementation("org.openjfx:javafx-fxml:$javafx")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
-}
-
-tasks.test {
-    useJUnitPlatform()
+    implementation("io.github.mkpaz:atlantafx-base:2.1.0")
 }
 
 jvmDependencyConflicts.patch {
