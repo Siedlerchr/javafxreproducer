@@ -2,7 +2,7 @@ plugins {
     java
     application
     id("org.gradlex.extra-java-module-info") version "1.13.1"
-    id("org.gradlex.jvm-dependency-conflict-resolution") version "2.4"
+    id("org.gradlex.jvm-dependency-conflict-resolution") version "2.5"
     id("org.gradlex.java-module-dependencies") version "1.11"
     id("org.gradlex.java-module-packaging") version "1.2"
 }
