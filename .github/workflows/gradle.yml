@@ -33,7 +33,7 @@ jobs:
     - uses: gradle/actions/setup-gradle@v5
     - run: ./gradlew jpackage
     - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         name: javafxreproducer-${{ matrix.os }}
         path: build/packages
