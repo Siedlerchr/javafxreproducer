@@ -19,7 +19,7 @@ repositories {
     mavenCentral()
 }
 
-val javafx = "25.0.1"
+val javafx = "25.0.2"
 val junitVersion = "6.0.2"
 
 java {
