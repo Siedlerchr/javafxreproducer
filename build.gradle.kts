@@ -20,7 +20,7 @@ repositories {
 }
 
 val javafx = "25.0.2"
-val junitVersion = "6.0.2"
+val junitVersion = "6.0.3"
 
 java {
   toolchain {
