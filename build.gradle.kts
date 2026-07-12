@@ -4,7 +4,7 @@ plugins {
     id("org.gradlex.extra-java-module-info") version "1.14.2"
     id("org.gradlex.jvm-dependency-conflict-resolution") version "2.5"
     id("org.gradlex.java-module-dependencies") version "1.13.1"
-    id("org.gradlex.java-module-packaging") version "1.2.1"
+    id("org.gradlex.java-module-packaging") version "1.3"
 }
 
 group = "org.jabreftest.test"
