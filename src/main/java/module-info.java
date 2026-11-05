@@ -3,6 +3,7 @@
 module javafx.reproducer {
     requires javafx.controls;
     requires javafx.fxml;
+    requires jfx.incubator.richtext;
 
 
     opens org.jabreftest.test.javafxreproducer to javafx.fxml;
