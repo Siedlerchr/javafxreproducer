@@ -80,6 +80,8 @@ tasks.register<JavaExec>("ethiopicFontReproducer") {
     classpath = sourceSets.main.get().runtimeClasspath
     mainModule.set("javafx.reproducer")
     mainClass.set("org.jabreftest.test.javafxreproducer.EthiopicFontReproducer")
+    systemProperty("prism.debugfonts", "true")
+    systemProperty("prism.verbose", "true")
 }
 
 extraJavaModuleInfo {
