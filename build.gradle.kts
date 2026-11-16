@@ -40,6 +40,7 @@ application {
 dependencies {
     implementation("org.openjfx:javafx-controls:$javafx")
     implementation("org.openjfx:javafx-fxml:$javafx")
+    implementation("org.openjfx:jfx-incubator-richtext:$javafx")
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
 }
@@ -59,6 +60,28 @@ jvmDependencyConflicts.patch {
             addTargetPlatformVariant("win", OperatingSystemFamily.WINDOWS, MachineArchitecture.X86_64)
         }
     }
+}
+
+jvmDependencyConflicts.patch {
+    listOf("richtext", "input").forEach { name ->
+        module("org.openjfx:jfx-incubator-$name") {
+            addTargetPlatformVariant("", "none", "none")
+            addTargetPlatformVariant("linux", OperatingSystemFamily.LINUX, MachineArchitecture.X86_64)
+            addTargetPlatformVariant("linux-aarch64", OperatingSystemFamily.LINUX, MachineArchitecture.ARM64)
+            addTargetPlatformVariant("mac", OperatingSystemFamily.MACOS, MachineArchitecture.X86_64)
+            addTargetPlatformVariant("mac-aarch64", OperatingSystemFamily.MACOS, MachineArchitecture.ARM64)
+            addTargetPlatformVariant("win", OperatingSystemFamily.WINDOWS, MachineArchitecture.X86_64)
+        }
+    }
+}
+
+tasks.register<JavaExec>("ethiopicFontReproducer") {
+    group = "application"
+    classpath = sourceSets.main.get().runtimeClasspath
+    mainModule.set("javafx.reproducer")
+    mainClass.set("org.jabreftest.test.javafxreproducer.EthiopicFontReproducer")
+    systemProperty("prism.debugfonts", "true")
+    systemProperty("prism.verbose", "true")
 }
 
 extraJavaModuleInfo {
